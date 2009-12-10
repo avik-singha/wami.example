@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wami:configuration xmlns:wami="http://wami.csail.mit.edu/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://wami.csail.mit.edu/ http://wami.csail.mit.edu/config.xsd">
+
+	<layout testBrowser="false">
+		<title>WAMI Toolkit</title>
+		<audio pollForAudio="false" />
+	</layout>
+
+	<relay relayClass="edu.mit.csail.sls.wami.relay.WamiRelay">
+		<settings maxRelays="250" noPollFromClientTimeout="60000" />
+	</relay>
+
+	<application class="edu.mit.csail.sls.wami.MyWamiApplication" />
+
+	<synthesizer class="edu.mit.csail.sls.wami.synthesis.URLSynthesizer">
+		<param name="url"
+			value="http://wami.csail.mit.edu:8080/synthesizers/synthesize" />
+	</synthesizer>
+
+	<recognizer
+		class="edu.mit.csail.sls.wami.portal.xmlrpc.XmlRpcPortalRecognizer">
+		<param name="url" value="http://wami.csail.mit.edu:8080/portal/" />
+		<param name="developerEmail" value="SSS" />
+		<param name="developerKey" value="SSS" />
+		<param name="recordFormat" value="LIN16" />
+		<param name="recordSampleRate" value="8000" />
+		<param name="recordIsLittleEndian" value="true" />
+	</recognizer>
+
+	<build appname="webmapgui" ajaxconfig="edu.mit.csail.sls.wami.WamiConfig" />
+
+</wami:configuration>
