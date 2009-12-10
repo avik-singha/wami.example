@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>myWamiApp</name>
+	<name>wami-example</name>
 	<comment></comment>
 	<projects>
+		<project>wami</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

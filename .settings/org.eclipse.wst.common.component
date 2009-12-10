@@ -3,6 +3,9 @@
 <wb-module deploy-name="myWamiApp">
 <wb-resource deploy-path="/" source-path="/WebContent"/>
 <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+<dependent-module archiveName="wami.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/wami/wami">
+<dependency-type>uses</dependency-type>
+</dependent-module>
 <property name="context-root" value="myWamiApp"/>
 <property name="java-output-path" value="build/classes"/>
 </wb-module>
