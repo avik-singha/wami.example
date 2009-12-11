@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>WAMI Parrot</title>
+
+<!-- 
+This script adds WAMI capabilities to the web page.
+Note, that this HTML file could be hosted ANYWHERE, 
+since Wami is designed with cross-site scripting in
+mind.  You'd just have to change this to an absolute URL:
+ -->
+<script src="wami.js"> </script>
+
+<script>
+var myWamiApp; 
+function onLoad() {
+	//div in which to put the audio button, see below
+  	var audioDiv = document.getElementById('AudioContainer'); 
+
+  	// JSGF grammar for your application
+	var jsgf = 
+		"#JSGF V1.0;\n" +
+		"grammar parrot;\n" +
+		"public <top> = hello wami | i want a cracker | feed me;\n";
+
+  	var grammar = {"language" : "en-us", "grammar" : jsgf };
+
+	//Audio options.
+  	//pollForAudio: must be true for speech synthesis to work. 
+  	//If your application doesn't use speech synthesis, set this to false.
+  	var audioOptions = {"pollForAudio" : true};
+
+  	//Configuration options.
+  	//sendIncrementalResults: if true, you'll receive "incremental" recognition results as the user speaks
+  	//sendAggregates: if true, you'll receive a "semantic" interpretation.  Your grammar
+  	//must follow a specific format.
+  	var configOptions = {"sendIncrementalResults" : false, "sendAggregates" : false};
+  
+  	//Handlers are functions which are called for various events:
+  	var handlers = {"onReady" : onWamiReady, //WAMI is loaded and ready
+		  		    "onRecognitionResult" : onWamiRecognitionResult,  //Speech recognition result available
+		  		    "onError" : onWamiError,  //An error occurred
+		  		    "onTimeout" : onWamiTimeout}; //WAMI timed out due to inactivity
+
+    //Create your WAMI application with the settings and grammar we just created
+  	myWamiApp = new WamiApp(audioDiv, handlers, "json", audioOptions, configOptions, grammar);
+}
+
+function onWamiReady() {
+	//Called when your WAMI application is ready.  You might wait until now
+	//to tell the user it's time to start interacting
+}
+
+//called when a speech recognition result is received
+//since we set sendIncrementalResults to false, this will only
+//be called after the user finishes speaking.  Otherwise,
+//it will be called many times as the user speaks.
+function onWamiRecognitionResult(result) {
+	var hyp = result.hyps[0].text;  //what we think the user said
+	alert("You said: '" + hyp + "'"); 
+	myWamiApp.speak(hyp); //Speech synthesis of what we heard
+	setTimeout("myWamiApp.replayLastRecording()", 500); //play back audio we recorded
+}
+
+//called when an error occurs
+function onWamiError(type, message) {
+	alert("WAMI error: type  = " + type + ", message = " + message);	
+}
+
+//called when your WAMI session times out due to
+//in activity.
+function onWamiTimeout() {
+	alert("WAMI timed out.  Hit reload to start over");
+}
+
+</script>
+</head>
+
+<!--  Your web page goes here.  Set the onload attribute to make sure the onLoad() function
+      defined above is called.  -->
+<body onload="onLoad()">
+
+<center>
+<div id="AudioContainer"></div>
+<!--  Audio button will be put here --> Hold the button and say: <br>
+<b>"Hello WAMI"</b> <br>
+or <br>
+<b> "I want a cracker!" </b><br>
+or <br>
+<b>"Feed me!"</b> <br>
+and I'll parrot it back. <br />
+<br />
+
+Powered by the <a href="http://wami.csail.mit.edu/">WAMI Javascript
+API</a></center>
+</body>
+</html>
