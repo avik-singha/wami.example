@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>myWamiApp</display-name>
+
+	<servlet>
+		<servlet-name>ajaxcontrol</servlet-name>
+		<servlet-class>edu.mit.csail.sls.wami.WamiServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ajaxcontrol</servlet-name>
+		<url-pattern>/ajaxcontrol</url-pattern>
+	</servlet-mapping>
+
+	<filter>
+		<filter-name>WamiCrossSiteGetFilter</filter-name>
+		<filter-class>edu.mit.csail.sls.wami.jsapi.WamiCrossSiteGetFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>WamiCrossSiteGetFilter</filter-name>
+		<url-pattern>/ajaxcontrol</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>WamiCrossSitePostFilter</filter-name>
+		<filter-class>edu.mit.csail.sls.wami.jsapi.WamiCrossSitePostFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>WamiCrossSitePostFilter</filter-name>
+		<url-pattern>/ajaxcontrol</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>play</servlet-name>
+		<servlet-class>edu.mit.csail.sls.wami.audio.PlayServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>play</servlet-name>
+		<url-pattern>/play</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>record</servlet-name>
+		<servlet-class>edu.mit.csail.sls.wami.audio.RecordServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>record</servlet-name>
+		<url-pattern>/record</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>content</servlet-name>
+		<servlet-class>edu.mit.csail.sls.wami.jsapi.WamiContentProxy</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>content</servlet-name>
+		<url-pattern>/wami.js</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>content</servlet-name>
+		<url-pattern>/content/*</url-pattern>
+	</servlet-mapping>
+
+	<context-param>
+		<param-name>configFileName</param-name>
+		<param-value>/WEB-INF/config.xml</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>audio</servlet-name>
+		<servlet-class>edu.mit.csail.sls.wami.database.DatabaseAudioServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>audio</servlet-name>
+		<url-pattern>/audio</url-pattern>
+	</servlet-mapping>
+</web-app>
