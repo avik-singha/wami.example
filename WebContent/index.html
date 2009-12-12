@@ -42,7 +42,7 @@ function onLoad() {
 		  		    "onTimeout" : onWamiTimeout}; //WAMI timed out due to inactivity
 
     //Create your WAMI application with the settings and grammar we just created
-  	myWamiApp = new WamiApp(audioDiv, handlers, "json", audioOptions, configOptions, grammar);
+  	myWamiApp = new Wami.App(audioDiv, handlers, "json", audioOptions, configOptions, grammar);
 }
 
 function onWamiReady() {
