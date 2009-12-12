@@ -22,8 +22,8 @@
 	<recognizer
 		class="edu.mit.csail.sls.wami.portal.xmlrpc.XmlRpcPortalRecognizer">
 		<param name="url" value="http://wami.csail.mit.edu:8080/portal/" />
-		<param name="developerEmail" value="X" />
-		<param name="developerKey" value="X" />
+		<param name="developerEmail" value="XX" />
+		<param name="developerKey" value="XX" />
 		<param name="recordFormat" value="LIN16" />
 		<param name="recordSampleRate" value="8000" />
 		<param name="recordIsLittleEndian" value="true" />
