@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import edu.mit.csail.sls.wami.app.IApplicationController;
 import edu.mit.csail.sls.wami.jsapi.ClientControlledApplication;
@@ -49,4 +50,11 @@ public class MyWamiApplication extends ClientControlledApplication {
 		// Just an example...
 		return null;
 	}
+	
+	@Override
+	public void onClientMessage(Element xmlRoot) {
+		// Messages sent from the client via postXML
+		super.onClientMessage(xmlRoot);
+	}
+
 }
