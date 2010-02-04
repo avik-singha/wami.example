@@ -33,6 +33,7 @@ public class MyWamiApplication extends ClientControlledApplication {
 	public void initialize(IApplicationController appController,
 			HttpSession session, Map<String, String> paramMap) {
 		this.controller = appController;
+		super.initialize(appController, session, paramMap);
 	};
 
 	@Override
